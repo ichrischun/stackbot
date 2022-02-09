@@ -58,6 +58,15 @@ const seed = async () => {
       })
     );
 
+    const robotsList = await Robot.findAll();
+    const projectsList = await Project.findAll();
+    await robotsList[0].addProject(projectsList[1]);
+    await robotsList[0].addProject(projectsList[2]);
+    await robotsList[1].addProject(projectsList[0]);
+    await robotsList[1].addProject(projectsList[1]);
+    await robotsList[2].addProject(projectsList[0]);
+    await robotsList[2].addProject(projectsList[2]);
+
     console.log(green('Seeding success!'));
     db.close();
   } catch (err) {

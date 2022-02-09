@@ -1,13 +1,27 @@
 const express = require('express');
 const robotsRouter = express.Router();
 
-const Robots = require('../db/robot');
+const Robot = require('../db/robot');
+const Project = require('../db/project');
 
-// GET /api/projects
+// GET /api/robots
 robotsRouter.get('/', async (req, res, next) => {
   try {
-    const robots = await Robots.findAll();
+    const robots = await Robot.findAll();
     res.send(robots);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET /api/robots/:id
+robotsRouter.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const robot = await Robot.findByPk(id, {
+      include: [{ model: Project }],
+    });
+    res.send(robot);
   } catch (error) {
     next(error);
   }
