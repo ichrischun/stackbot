@@ -3,6 +3,7 @@ import axios from 'axios';
 // ACTION TYPES
 const GOT_ALL_ROBOTS = 'GOT_ALL_ROBOTS';
 const GOT_ROBOT = 'GOT_ROBOT';
+const ADD_ROBOT = 'ADD_ROBOT';
 
 // ACTION CREATORS
 const gotAllRobots = (robots) => {
@@ -15,6 +16,12 @@ const gotRobot = (robot) => {
   return {
     type: GOT_ROBOT,
     robot,
+  };
+};
+const addRobot = (newRobot) => {
+  return {
+    type: ADD_ROBOT,
+    newRobot,
   };
 };
 
@@ -41,6 +48,17 @@ export const fetchRobot = (robotId) => {
   };
 };
 
+export const addedRobot = (newRobot) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post('/api/robots', newRobot);
+      dispatch(addRobot(data));
+    } catch (error) {
+      console.log('addedRobot thunk error: ', error);
+    }
+  };
+};
+
 // export const setRobots = () => {};
 
 const initialState = {
@@ -48,6 +66,7 @@ const initialState = {
   robot: {
     projects: [],
   },
+  newRobot: [],
 };
 
 // Take a look at app/redux/index.js to see where this reducer is
@@ -58,6 +77,12 @@ export default function robotsReducer(state = initialState, action) {
       return { ...state, allRobots: action.robots };
     case GOT_ROBOT:
       return { ...state, robot: action.robot };
+    case ADD_ROBOT:
+      return {
+        ...state,
+        allRobots: [...state.allRobots, action.newRobot],
+        newRobot: [action.newRobot],
+      };
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../redux/projects';
 import { Link } from 'react-router-dom';
+import AddProjectForm from './AddProjectForm';
 
 // Notice that we're exporting the AllProjects component twice. The named export
 // (below) is not connected to Redux, while the default export (at the very
@@ -14,6 +15,7 @@ class AllProjects extends React.Component {
   render() {
     return (
       <div>
+        <AddProjectForm />
         <h1>All Projects:</h1>
         {this.props.projects.map((project) => (
           <Link to={`/projects/${project.id}`} key={project.id}>

@@ -27,4 +27,13 @@ robotsRouter.get('/:id', async (req, res, next) => {
   }
 });
 
+// POST /api/robots
+robotsRouter.post('/', async (req, res, next) => {
+  try {
+    res.status(201).send(await Robot.create(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = robotsRouter;
