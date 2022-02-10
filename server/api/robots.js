@@ -36,6 +36,16 @@ robotsRouter.post('/', async (req, res, next) => {
   }
 });
 
+// PUT /api/robots/:id
+robotsRouter.put('/:id', async (req, res, next) => {
+  try {
+    const robot = await Robot.findByPk(req.params.id);
+    res.send(await robot.update(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
+
 // DELETE /api/robots/:id
 robotsRouter.delete('/:id', async (req, res, next) => {
   try {

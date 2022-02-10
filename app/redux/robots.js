@@ -5,6 +5,7 @@ const GOT_ALL_ROBOTS = 'GOT_ALL_ROBOTS';
 const GOT_ROBOT = 'GOT_ROBOT';
 const ADD_ROBOT = 'ADD_ROBOT';
 const DELETE_ROBOT = 'DELETE_ROBOT';
+const UPDATE_ROBOT = 'UPDATE_ROBOT';
 
 // ACTION CREATORS
 const gotAllRobots = (robots) => {
@@ -28,6 +29,12 @@ const addRobot = (newRobot) => {
 const deleteRobot = (robot) => {
   return {
     type: DELETE_ROBOT,
+    robot,
+  };
+};
+const updateRobot = (robot) => {
+  return {
+    type: UPDATE_ROBOT,
     robot,
   };
 };
@@ -77,6 +84,21 @@ export const deletedRobot = (robot) => {
   };
 };
 
+export const updatedRobot = (id, name, fuelLevel) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/api/robots/${id}`, {
+        id,
+        name,
+        fuelLevel,
+      });
+      dispatch(updateRobot(data));
+    } catch (error) {
+      console.log('updatedRobot thunk error: ', error);
+    }
+  };
+};
+
 // export const setRobots = () => {};
 
 const initialState = {
@@ -107,6 +129,11 @@ export default function robotsReducer(state = initialState, action) {
         allRobots: [
           state.allRobots.filter((robot) => robot.id !== action.robot.id),
         ],
+        robot: action.robot,
+      };
+    case UPDATE_ROBOT:
+      return {
+        ...state,
         robot: action.robot,
       };
     default:

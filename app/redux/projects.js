@@ -5,6 +5,7 @@ const GOT_ALL_PROJECTS = 'GOT_ALL_PROJECTS';
 const GOT_PROJECT = 'GOT_PROJECT';
 const ADD_PROJECT = 'ADD_PROJECT';
 const DELETE_PROJECT = 'DELETE_PROJECT';
+const UPDATE_PROJECT = 'UPDATE_PROJECT';
 
 // ACTION CREATORS
 const gotAllProjects = (projects) => {
@@ -28,6 +29,12 @@ const addProject = (newProject) => {
 const deleteProject = (project) => {
   return {
     type: DELETE_PROJECT,
+    project,
+  };
+};
+const updateProject = (project) => {
+  return {
+    type: UPDATE_PROJECT,
     project,
   };
 };
@@ -77,6 +84,21 @@ export const deletedProject = (project) => {
   };
 };
 
+export const updatedProject = (id, title, completed) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/api/projects/${id}`, {
+        id,
+        title,
+        completed,
+      });
+      dispatch(updateProject(data));
+    } catch (error) {
+      console.log('updatedProject thunk error: ', error);
+    }
+  };
+};
+
 // export const setProjects = () => {};
 
 const initialState = {
@@ -109,6 +131,11 @@ export default function projectsReducer(state = initialState, action) {
             (project) => project.id !== action.project.id
           ),
         ],
+        project: action.project,
+      };
+    case UPDATE_PROJECT:
+      return {
+        ...state,
         project: action.project,
       };
     default:
