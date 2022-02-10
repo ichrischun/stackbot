@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchProjects } from '../redux/projects';
+import { fetchProjects, deletedProject } from '../redux/projects';
 import { Link } from 'react-router-dom';
 import AddProjectForm from './AddProjectForm';
 
@@ -13,17 +13,26 @@ class AllProjects extends React.Component {
     this.props.fetchProjects();
   }
   render() {
+    const projects = this.props.projects;
+    console.log(projects);
     return (
       <div>
         <AddProjectForm />
         <h1>All Projects:</h1>
-        {this.props.projects.map((project) => (
-          <Link to={`/projects/${project.id}`} key={project.id}>
-            <div>
+        {projects.map((project) => (
+          <div key={project.id}>
+            <Link to={`/projects/${project.id}`}>
               <h1>{project.title}</h1>
-              <h2>{project.deadline}</h2>
-            </div>
-          </Link>
+            </Link>
+            <h2>{project.deadline}</h2>
+            <button
+              type="button"
+              // onClick={() => console.log('i want to sleep')}
+              onClick={() => this.props.deletedProject(project)}
+            >
+              Delete
+            </button>
+          </div>
         ))}
       </div>
     );
@@ -39,6 +48,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchProjects: () => dispatch(fetchProjects()),
+    deletedProject: (project) => dispatch(deletedProject(project)),
   };
 };
 

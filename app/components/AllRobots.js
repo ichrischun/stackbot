@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchRobots } from '../redux/robots';
+import { fetchRobots, deletedRobot } from '../redux/robots';
 import { Link } from 'react-router-dom';
 import AddRobotForm from './AddRobotForm';
 
@@ -9,24 +9,39 @@ import AddRobotForm from './AddRobotForm';
 // bottom) is connected to Redux. Our tests should cover _both_ cases.
 
 export class AllRobots extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.handleDelete = this.handleDelete.bind(this);
+  // }
   componentDidMount() {
     this.props.fetchRobots();
   }
+  // handleDelete(id) {
+  //   this.props.deletedRobot(id);
+  // }
   render() {
+    console.log('help', this.props);
     return (
       <div>
         <AddRobotForm />
         <h1>All Robots:</h1>
         {this.props.robots.map((robot) => (
-          <Link to={`/robots/${robot.id}`} key={robot.id}>
-            <div>
+          <div key={robot.id}>
+            <Link to={`/robots/${robot.id}`}>
               <h1>{robot.name}</h1>
-              <img
-                src={robot.imageUrl}
-                style={{ width: '200px', height: '200px' }}
-              />
-            </div>
-          </Link>
+            </Link>
+            <img
+              src={robot.imageUrl}
+              style={{ width: '200px', height: '200px' }}
+            />
+            <button
+              type="button"
+              // onClick={() => console.log('hi')}
+              onClick={() => this.props.deletedRobot(robot)}
+            >
+              Delete
+            </button>
+          </div>
         ))}
       </div>
     );
@@ -42,6 +57,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchRobots: () => dispatch(fetchRobots()),
+    deletedRobot: (robot) => dispatch(deletedRobot(robot)),
   };
 };
 

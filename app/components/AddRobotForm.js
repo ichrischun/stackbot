@@ -24,7 +24,6 @@ class AddRobotForm extends React.Component {
   render() {
     const { name } = this.state;
     const { handleSubmit, handleChange } = this;
-    console.log('state', this.state);
     return (
       <div>
         <form onSubmit={handleSubmit}>

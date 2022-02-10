@@ -4,6 +4,7 @@ import axios from 'axios';
 const GOT_ALL_ROBOTS = 'GOT_ALL_ROBOTS';
 const GOT_ROBOT = 'GOT_ROBOT';
 const ADD_ROBOT = 'ADD_ROBOT';
+const DELETE_ROBOT = 'DELETE_ROBOT';
 
 // ACTION CREATORS
 const gotAllRobots = (robots) => {
@@ -22,6 +23,12 @@ const addRobot = (newRobot) => {
   return {
     type: ADD_ROBOT,
     newRobot,
+  };
+};
+const deleteRobot = (robot) => {
+  return {
+    type: DELETE_ROBOT,
+    robot,
   };
 };
 
@@ -59,6 +66,17 @@ export const addedRobot = (newRobot) => {
   };
 };
 
+export const deletedRobot = (robot) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/robots/${robot.id}`, robot);
+      dispatch(deleteRobot(robot));
+    } catch (error) {
+      console.log('deletedRobot thunk error: ', error);
+    }
+  };
+};
+
 // export const setRobots = () => {};
 
 const initialState = {
@@ -82,6 +100,14 @@ export default function robotsReducer(state = initialState, action) {
         ...state,
         allRobots: [...state.allRobots, action.newRobot],
         newRobot: [action.newRobot],
+      };
+    case DELETE_ROBOT:
+      return {
+        ...state,
+        allRobots: [
+          state.allRobots.filter((robot) => robot.id !== action.robot.id),
+        ],
+        robot: action.robot,
       };
     default:
       return state;
