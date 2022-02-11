@@ -20,7 +20,7 @@ export class AllRobots extends React.Component {
   //   this.props.deletedRobot(id);
   // }
   render() {
-    console.log('help', this.props);
+    // console.log('help', this.props);
     return (
       <div>
         <AddRobotForm />

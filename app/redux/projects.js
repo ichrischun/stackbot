@@ -6,6 +6,8 @@ const GOT_PROJECT = 'GOT_PROJECT';
 const ADD_PROJECT = 'ADD_PROJECT';
 const DELETE_PROJECT = 'DELETE_PROJECT';
 const UPDATE_PROJECT = 'UPDATE_PROJECT';
+const UNASSIGN_PROJECT = 'UNASSIGN_PROJECT';
+const MARK_COMPLETE = 'MARK_COMPLETE';
 
 // ACTION CREATORS
 const gotAllProjects = (projects) => {
@@ -35,6 +37,18 @@ const deleteProject = (project) => {
 const updateProject = (project) => {
   return {
     type: UPDATE_PROJECT,
+    project,
+  };
+};
+const unassignProject = (project) => {
+  return {
+    type: UNASSIGN_PROJECT,
+    project,
+  };
+};
+const markComplete = (project) => {
+  return {
+    type: MARK_COMPLETE,
     project,
   };
 };
@@ -99,6 +113,28 @@ export const updatedProject = (id, title, completed) => {
   };
 };
 
+export const unassignedProject = (projectId, robotId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/api/projects/${projectId}/${robotId}`);
+      dispatch(unassignProject(data));
+    } catch (error) {
+      console.log('unassignedProject thunk error: ', error);
+    }
+  };
+};
+
+export const markedComplete = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/api/projects/${id}/complete`);
+      dispatch(markComplete(data));
+    } catch (error) {
+      console.log('markedComplete thunk error: ', error);
+    }
+  };
+};
+
 // export const setProjects = () => {};
 
 const initialState = {
@@ -134,6 +170,16 @@ export default function projectsReducer(state = initialState, action) {
         project: action.project,
       };
     case UPDATE_PROJECT:
+      return {
+        ...state,
+        project: action.project,
+      };
+    case UNASSIGN_PROJECT:
+      return {
+        ...state,
+        project: action.project,
+      };
+    case MARK_COMPLETE:
       return {
         ...state,
         project: action.project,

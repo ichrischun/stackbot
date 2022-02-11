@@ -14,7 +14,7 @@ class AllProjects extends React.Component {
   }
   render() {
     const projects = this.props.projects;
-    console.log(projects);
+    // console.log(projects);
     return (
       <div>
         <AddProjectForm />

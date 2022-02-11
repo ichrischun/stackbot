@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchRobot } from '../redux/robots';
+import { fetchRobot, unassignedRobot } from '../redux/robots';
 import { fetchProjects } from '../redux/projects';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,8 @@ export class SingleRobot extends React.Component {
     const filterProjects = projects.filter((project) =>
       grabProjectID.includes(project.id)
     );
-
+    // console.log('help me', robot.projects);
+    // console.log('pro', projects);
     return (
       <div>
         <h1>Name: {robot.name}</h1>
@@ -27,11 +28,27 @@ export class SingleRobot extends React.Component {
           <h2>Projects assigned to this Robot:</h2>
           {filterProjects.length ? (
             filterProjects.map((project) => (
-              <Link to={`/projects/${project.id}`} key={project.id}>
-                <div>
+              // <Link to={`/projects/${project.id}`} key={project.id}>
+              <div key={project.id}>
+                <Link to={`/projects/${project.id}`}>
                   <h1>{project.title}</h1>
-                </div>
-              </Link>
+                </Link>
+                <button
+                  type="button"
+                  // onClick={() =>
+                  //   console.log(this.props.match.params.id, project.id)
+                  // }
+                  onClick={() =>
+                    this.props.unassignedRobot(
+                      this.props.match.params.id,
+                      project.id
+                    )
+                  }
+                >
+                  Unassign
+                </button>
+              </div>
+              // </Link>
             ))
           ) : (
             <p>No projects assigned to this robot</p>
@@ -53,6 +70,8 @@ const mapDispatch = (dispatch) => {
   return {
     fetchRobot: (id) => dispatch(fetchRobot(id)),
     fetchProjects: () => dispatch(fetchProjects()),
+    unassignedRobot: (robotId, projectId) =>
+      dispatch(unassignedRobot(robotId, projectId)),
   };
 };
 

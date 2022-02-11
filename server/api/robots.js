@@ -46,6 +46,22 @@ robotsRouter.put('/:id', async (req, res, next) => {
   }
 });
 
+// PUT /api/robots/:robotId/:projectId
+robotsRouter.put('/:robotId/:projectId', async (req, res, next) => {
+  try {
+    const robotId = req.params.robotId;
+    const projectId = req.params.projectId;
+    const findRobot = await Robot.findByPk(robotId);
+    await findRobot.removeProject(projectId);
+    const robot = await Robot.findByPk(robotId, {
+      include: [{ model: Project }],
+    });
+    res.send(robot);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // DELETE /api/robots/:id
 robotsRouter.delete('/:id', async (req, res, next) => {
   try {

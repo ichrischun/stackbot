@@ -6,6 +6,7 @@ import SingleRobot from './SingleRobot';
 import SingleProject from './SingleProject';
 import EditRobotForm from './EditRobotForm';
 import EditProjectForm from './EditProjectForm';
+import Home from './Home';
 
 const Routes = () => {
   return (
@@ -13,8 +14,9 @@ const Routes = () => {
       <div>
         <nav>
           Welcome!
+          <Link to="/">Home</Link>
           <Link to="/robots">All Robots</Link>
-          <Link to="projects">All Projects</Link>
+          <Link to="/projects">All Projects</Link>
         </nav>
         <main>
           <h1>
@@ -23,7 +25,7 @@ const Routes = () => {
           </h1>
           <p>This seems like a nice place to get started with some Routes!</p>
           <Switch>
-            <Route exact path="/" component={EditRobotForm} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/robots" component={AllRobots} />
             <Route exact path="/robots/:id" component={SingleRobot} />
             <Route exact path="/robots/:id/edit" component={EditRobotForm} />

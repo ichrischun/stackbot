@@ -46,6 +46,40 @@ projectsRouter.put('/:id', async (req, res, next) => {
   }
 });
 
+// PUT /api/projects/:id/complete
+projectsRouter.put('/:id/complete', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const findProject = await Project.findByPk(id);
+    const status = findProject.completed;
+    if (status !== 'TRUE') {
+      await Project.update({ completed: 'TRUE' }, { where: { id: id } });
+    }
+    const project = await Project.findByPk(id, {
+      include: [{ model: Robot }],
+    });
+    res.send(project);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT /api/projects/:projectId/:robotId
+projectsRouter.put('/:projectId/:robotId', async (req, res, next) => {
+  try {
+    const projectId = req.params.projectId;
+    const robotId = req.params.robotId;
+    const findProject = await Project.findByPk(projectId);
+    await findProject.removeRobot(robotId);
+    const project = await Project.findByPk(projectId, {
+      include: [{ model: Robot }],
+    });
+    res.send(project);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // DELETE /api/projects/:id
 projectsRouter.delete('/:id', async (req, res, next) => {
   try {
