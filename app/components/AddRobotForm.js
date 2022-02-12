@@ -7,6 +7,8 @@ class AddRobotForm extends React.Component {
     super(props);
     this.state = {
       name: '',
+      fuelType: '',
+      fuelLevel: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,22 +21,45 @@ class AddRobotForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.addedRobot({ ...this.state });
-    this.setState({ name: '' });
+    this.setState({ name: '', fuelType: '', fuelLevel: '' });
   }
   render() {
-    const { name } = this.state;
+    const { name, fuelType, fuelLevel } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
       <div>
+        <h1>Add New Robot Below:</h1>
         <form onSubmit={handleSubmit}>
-          <label>Robot Name:</label>
+          <label>Robot Name: </label>
           <input
             type="text"
-            placeholder="Enter Robot Name Here"
+            placeholder="Robot Name Here"
             name="name"
             value={name}
             onChange={handleChange}
+            required
           />
+          <br />
+          <br />
+          <label>Fuel Type: </label>
+          <select name="fuelType" value={fuelType} onChange={handleChange}>
+            <option value="-">-</option>
+            <option value="gas">Gas</option>
+            <option value="diesel">Diesel</option>
+            <option value="electric">Electric</option>
+          </select>
+          <br />
+          <br />
+          <label>Fuel Level:</label>
+          <input
+            type="text"
+            placeholder="Fuel Level Here"
+            name="fuelLevel"
+            value={fuelLevel}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
           <button type="submit">Submit</button>
         </form>
       </div>

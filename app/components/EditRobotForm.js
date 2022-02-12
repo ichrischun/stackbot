@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchRobot, updatedRobot } from '../redux/robots';
+import { Link } from 'react-router-dom';
 
 class EditRobotForm extends React.Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class EditRobotForm extends React.Component {
     const { handleSubmit, handleChange } = this;
     return (
       <div>
+        <h2>Edit Here:</h2>
         <form onSubmit={handleSubmit}>
           <label>Robot Name:</label>
           <input
@@ -51,6 +53,8 @@ class EditRobotForm extends React.Component {
             value={name}
             onChange={handleChange}
           />
+          <br />
+          <br />
           <label>Fuel Level:</label>
           <input
             type="text"
@@ -59,7 +63,11 @@ class EditRobotForm extends React.Component {
             value={fuelLevel}
             onChange={handleChange}
           />
+          <br />
+          <br />
           <button type="submit">Save Change</button>
+          {/* <br /> */}
+          {/* <Link to={`/robots/${this.props.robot.id}`}>View Updated Robot</Link> */}
         </form>
       </div>
     );

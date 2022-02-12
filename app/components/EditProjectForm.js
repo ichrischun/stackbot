@@ -42,6 +42,7 @@ class EditProjectForm extends React.Component {
     const { handleSubmit, handleChange } = this;
     return (
       <div>
+        <h2>Edit Here:</h2>
         <form onSubmit={handleSubmit}>
           <label>Project Title:</label>
           <input
@@ -51,12 +52,16 @@ class EditProjectForm extends React.Component {
             value={title}
             onChange={handleChange}
           />
+          <br />
+          <br />
           <label>Completed?</label>
           <select name="completed" value={completed} onChange={handleChange}>
             <option value="-">-</option>
             <option value="TRUE">COMPLETED</option>
             <option value="FALSE">NOT COMPLETED</option>
           </select>
+          <br />
+          <br />
           <button type="submit">Save Change</button>
         </form>
       </div>

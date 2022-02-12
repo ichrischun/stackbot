@@ -20,7 +20,7 @@ export class SingleProject extends React.Component {
     const filterRobots = robots.filter((robot) =>
       grabRobotID.includes(robot.id)
     );
-
+    console.log(project);
     return (
       <div>
         <h1>Title: {project.title}</h1>
@@ -33,6 +33,9 @@ export class SingleProject extends React.Component {
         >
           Complete
         </button>
+        <h3>Status: {project.completed ? 'Completed' : 'Not Completed'}</h3>
+        <br />
+        <br />
         <div>
           <h2>Robots assigned to this Project:</h2>
           {filterRobots.length ? (

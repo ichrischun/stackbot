@@ -10,7 +10,7 @@ const Project = db.define('project', {
     },
   },
   deadline: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
   },
   priority: {
     type: Sequelize.INTEGER,

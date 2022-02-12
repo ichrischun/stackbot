@@ -20,6 +20,17 @@ const robots = [
   },
 ];
 
+const createRobots = () => {
+  let robotsArray = [];
+  for (let i = 1; i < 120; i++) {
+    robotsArray.push({
+      name: 'Mini Chris-Bot ' + i,
+    });
+  }
+  return robotsArray;
+};
+const fakeRobots = createRobots();
+
 const projects = [
   {
     title: 'Update Excel Spreadsheet',
@@ -41,6 +52,20 @@ const projects = [
   },
 ];
 
+const createProjects = () => {
+  let projectsArray = [];
+  for (let i = 1; i < 120; i++) {
+    projectsArray.push({
+      title: 'Project ' + i,
+      deadline: '2022-12-31',
+      priority: 5,
+      description: 'finish ASAP please',
+    });
+  }
+  return projectsArray;
+};
+const fakeProjects = createProjects();
+
 const seed = async () => {
   try {
     await db.sync({ force: true });
@@ -51,9 +76,18 @@ const seed = async () => {
         return Robot.create(robot);
       })
     );
-
+    await Promise.all(
+      fakeRobots.map((robot) => {
+        return Robot.create(robot);
+      })
+    );
     await Promise.all(
       projects.map((project) => {
+        return Project.create(project);
+      })
+    );
+    await Promise.all(
+      fakeProjects.map((project) => {
         return Project.create(project);
       })
     );
@@ -66,6 +100,18 @@ const seed = async () => {
     await robotsList[1].addProject(projectsList[1]);
     await robotsList[2].addProject(projectsList[0]);
     await robotsList[2].addProject(projectsList[2]);
+    await robotsList[3].addProject(projectsList[2]);
+    await robotsList[3].addProject(projectsList[1]);
+    await robotsList[5].addProject(projectsList[3]);
+    await robotsList[5].addProject(projectsList[4]);
+    await robotsList[4].addProject(projectsList[5]);
+    await robotsList[4].addProject(projectsList[6]);
+    await robotsList[4].addProject(projectsList[1]);
+    await robotsList[1].addProject(projectsList[5]);
+    await robotsList[2].addProject(projectsList[6]);
+    await robotsList[5].addProject(projectsList[7]);
+    await robotsList[6].addProject(projectsList[1]);
+    await robotsList[7].addProject(projectsList[2]);
 
     console.log(green('Seeding success!'));
     db.close();

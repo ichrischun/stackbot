@@ -7,6 +7,9 @@ class AddProjectForm extends React.Component {
     super(props);
     this.state = {
       title: '',
+      deadline: '',
+      priority: '',
+      description: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,22 +22,56 @@ class AddProjectForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.addedProject({ ...this.state });
-    this.setState({ title: '' });
+    this.setState({ title: '', deadline: '', priority: '' });
   }
   render() {
-    const { title } = this.state;
+    const { title, deadline, priority, description } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
       <div>
+        <h1>Add New Project Below:</h1>
         <form onSubmit={handleSubmit}>
-          <label>Project Title:</label>
+          <label>Project Title: </label>
           <input
             type="text"
-            placeholder="Enter Project Title Here"
+            placeholder="Project Title Here"
             name="title"
             value={title}
             onChange={handleChange}
+            required
           />
+          <br />
+          <br />
+          <label>Project Deadline: </label>
+          <input
+            type="text"
+            placeholder="(YYYY-MM-DD)"
+            name="deadline"
+            value={deadline}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+          <label>Project Priority: </label>
+          <input
+            type="text"
+            placeholder="Project Priority (1-10)"
+            name="priority"
+            value={priority}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+          <label>Project Description: </label>
+          <input
+            type="text"
+            placeholder="Project Description"
+            name="description"
+            value={description}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
           <button type="submit">Submit</button>
         </form>
       </div>

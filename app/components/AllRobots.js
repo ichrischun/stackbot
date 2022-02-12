@@ -25,24 +25,33 @@ export class AllRobots extends React.Component {
       <div>
         <AddRobotForm />
         <h1>All Robots:</h1>
-        {this.props.robots.map((robot) => (
-          <div key={robot.id}>
-            <Link to={`/robots/${robot.id}`}>
-              <h1>{robot.name}</h1>
-            </Link>
-            <img
-              src={robot.imageUrl}
-              style={{ width: '200px', height: '200px' }}
-            />
-            <button
-              type="button"
-              // onClick={() => console.log('hi')}
-              onClick={() => this.props.deletedRobot(robot)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
+        <div className="AllRobots">
+          {this.props.robots.map((robot) => (
+            <div key={robot.id} className="eachRobot">
+              <Link to={`/robots/${robot.id}`}>
+                <h1>{robot.name}</h1>
+              </Link>
+              <h2>Fuel Type: {robot.fuelType}</h2>
+              <h2>Fuel Level: {robot.fuelLevel}</h2>
+              <img
+                src={robot.imageUrl}
+                style={{ width: '200px', height: '200px' }}
+              />
+              <br />
+              <br />
+              <button
+                type="button"
+                // onClick={() => console.log('hi')}
+                onClick={() => this.props.deletedRobot(robot)}
+              >
+                Delete
+              </button>
+              <button type="button">
+                <Link to={`/robots/${robot.id}/edit`}>Edit</Link>
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

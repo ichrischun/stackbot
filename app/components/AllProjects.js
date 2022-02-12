@@ -14,7 +14,7 @@ class AllProjects extends React.Component {
   }
   render() {
     const projects = this.props.projects;
-    // console.log(projects);
+    console.log(projects);
     return (
       <div>
         <AddProjectForm />
@@ -24,7 +24,12 @@ class AllProjects extends React.Component {
             <Link to={`/projects/${project.id}`}>
               <h1>{project.title}</h1>
             </Link>
-            <h2>{project.deadline}</h2>
+            <h2>Deadline: {project.deadline}</h2>
+            <h2>Priority Level (1-10): {project.priority}</h2>
+            <h2>
+              Current Status: {project.completed ? 'Completed' : 'Not Complete'}
+            </h2>
+            <h2>Description: {project.description}</h2>
             <button
               type="button"
               // onClick={() => console.log('i want to sleep')}
@@ -32,6 +37,11 @@ class AllProjects extends React.Component {
             >
               Delete
             </button>
+            <button type="button">
+              <Link to={`/projects/${project.id}/edit`}>Edit</Link>
+            </button>
+            <br />
+            <br />
           </div>
         ))}
       </div>

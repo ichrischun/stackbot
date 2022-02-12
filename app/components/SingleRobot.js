@@ -18,12 +18,15 @@ export class SingleRobot extends React.Component {
     );
     // console.log('help me', robot.projects);
     // console.log('pro', projects);
+    // console.log('robot', robot);
     return (
       <div>
         <h1>Name: {robot.name}</h1>
         <img src={robot.imageUrl} style={{ width: '200px', height: '200px' }} />
         <h2>Fuel Type: {robot.fuelType}</h2>
         <h2>Fuel Level: {robot.fuelLevel}</h2>
+        <br />
+        <br />
         <div>
           <h2>Projects assigned to this Robot:</h2>
           {filterProjects.length ? (

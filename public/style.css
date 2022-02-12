@@ -23,6 +23,7 @@ nav {
   display: flex;
   height: 80px;
   padding: 10px;
+  justify-content: space-evenly;
 }
 
 main {
@@ -31,3 +32,16 @@ main {
   flex-direction: column;
   justify-content: center;
 }
+
+/* .AllRobots {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.eachRobot {
+  height: 500px;
+  width: 300px;
+  padding: 10px;
+} */
