@@ -66,8 +66,6 @@ class EditRobotForm extends React.Component {
           <br />
           <br />
           <button type="submit">Save Change</button>
-          {/* <br /> */}
-          {/* <Link to={`/robots/${this.props.robot.id}`}>View Updated Robot</Link> */}
         </form>
       </div>
     );

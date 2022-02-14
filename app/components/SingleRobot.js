@@ -16,9 +16,6 @@ export class SingleRobot extends React.Component {
     const filterProjects = projects.filter((project) =>
       grabProjectID.includes(project.id)
     );
-    // console.log('help me', robot.projects);
-    // console.log('pro', projects);
-    // console.log('robot', robot);
     return (
       <div>
         <h1>Name: {robot.name}</h1>
@@ -31,16 +28,12 @@ export class SingleRobot extends React.Component {
           <h2>Projects assigned to this Robot:</h2>
           {filterProjects.length ? (
             filterProjects.map((project) => (
-              // <Link to={`/projects/${project.id}`} key={project.id}>
               <div key={project.id}>
                 <Link to={`/projects/${project.id}`}>
                   <h1>{project.title}</h1>
                 </Link>
                 <button
                   type="button"
-                  // onClick={() =>
-                  //   console.log(this.props.match.params.id, project.id)
-                  // }
                   onClick={() =>
                     this.props.unassignedRobot(
                       this.props.match.params.id,
@@ -51,7 +44,6 @@ export class SingleRobot extends React.Component {
                   Unassign
                 </button>
               </div>
-              // </Link>
             ))
           ) : (
             <p>No projects assigned to this robot</p>

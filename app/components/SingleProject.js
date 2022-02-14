@@ -20,7 +20,6 @@ export class SingleProject extends React.Component {
     const filterRobots = robots.filter((robot) =>
       grabRobotID.includes(robot.id)
     );
-    console.log(project);
     return (
       <div>
         <h1>Title: {project.title}</h1>
@@ -40,7 +39,6 @@ export class SingleProject extends React.Component {
           <h2>Robots assigned to this Project:</h2>
           {filterRobots.length ? (
             filterRobots.map((robot) => (
-              // <Link to={`/robots/${robot.id}`} key={robot.id}>
               <div key={robot.id}>
                 <Link to={`/robots/${robot.id}`}>
                   <h1>{robot.name}</h1>
@@ -57,7 +55,6 @@ export class SingleProject extends React.Component {
                   Unassign
                 </button>
               </div>
-              // </Link>
             ))
           ) : (
             <p>No robots assigned to this project</p>

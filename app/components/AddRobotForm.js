@@ -27,7 +27,7 @@ class AddRobotForm extends React.Component {
     const { name, fuelType, fuelLevel } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
-      <div>
+      <div className="newForm">
         <h1>Add New Robot Below:</h1>
         <form onSubmit={handleSubmit}>
           <label>Robot Name: </label>

@@ -28,7 +28,7 @@ class AddProjectForm extends React.Component {
     const { title, deadline, priority, description } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
-      <div>
+      <div className="newForm">
         <h1>Add New Project Below:</h1>
         <form onSubmit={handleSubmit}>
           <label>Project Title: </label>

@@ -9,18 +9,10 @@ import AddRobotForm from './AddRobotForm';
 // bottom) is connected to Redux. Our tests should cover _both_ cases.
 
 export class AllRobots extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.handleDelete = this.handleDelete.bind(this);
-  // }
   componentDidMount() {
     this.props.fetchRobots();
   }
-  // handleDelete(id) {
-  //   this.props.deletedRobot(id);
-  // }
   render() {
-    // console.log('help', this.props);
     return (
       <div>
         <AddRobotForm />
@@ -41,7 +33,6 @@ export class AllRobots extends React.Component {
               <br />
               <button
                 type="button"
-                // onClick={() => console.log('hi')}
                 onClick={() => this.props.deletedRobot(robot)}
               >
                 Delete

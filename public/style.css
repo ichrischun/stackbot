@@ -33,7 +33,14 @@ main {
   justify-content: center;
 }
 
-/* .AllRobots {
+.newForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.AllRobots {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -44,4 +51,17 @@ main {
   height: 500px;
   width: 300px;
   padding: 10px;
-} */
+}
+
+.AllProjects {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.eachProject {
+  height: 400px;
+  width: 300px;
+  padding: 10px;
+}
