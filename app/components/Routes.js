@@ -8,19 +8,26 @@ import EditRobotForm from './EditRobotForm';
 import EditProjectForm from './EditProjectForm';
 import Home from './Home';
 import NotFoundPage from './NotFoundPage';
+import { Nav } from 'react-bootstrap';
 
 const Routes = () => {
   return (
     <Router>
       <div>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/robots">All Robots</Link>
-          <Link to="/projects">All Projects</Link>
-        </nav>
+        <Nav className="justify-content-end" activeKey="/home">
+          <Nav.Item>
+            <Nav.Link href="/home">Home</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/robots">All Robots</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/projects">All Projects</Nav.Link>
+          </Nav.Item>
+        </Nav>
         <main>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/robots" component={AllRobots} />
             <Route exact path="/robots/:id" component={SingleRobot} />
             <Route exact path="/robots/:id/edit" component={EditRobotForm} />

@@ -4,7 +4,7 @@ import { fetchRobot, unassignedRobot } from '../redux/robots';
 import { fetchProjects } from '../redux/projects';
 import { Link } from 'react-router-dom';
 
-export class SingleRobot extends React.Component {
+export class SingleRobot_Class extends React.Component {
   componentDidMount() {
     this.props.fetchRobot(this.props.match.params.id);
     this.props.fetchProjects();
@@ -70,4 +70,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(SingleRobot);
+export default connect(mapState, mapDispatch)(SingleRobot_Class);

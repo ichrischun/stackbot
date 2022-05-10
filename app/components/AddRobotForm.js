@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormControl, InputGroup, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { addedRobot } from '../redux/robots';
 
@@ -30,37 +31,40 @@ class AddRobotForm extends React.Component {
       <div className="newForm">
         <h1>Add New Robot Below:</h1>
         <form onSubmit={handleSubmit}>
-          <label>Robot Name: </label>
-          <input
-            type="text"
-            placeholder="Robot Name Here"
-            name="name"
-            value={name}
-            onChange={handleChange}
-            required
-          />
-          <br />
-          <br />
-          <label>Fuel Type: </label>
-          <select name="fuelType" value={fuelType} onChange={handleChange}>
-            <option value="-">-</option>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Robot Name: </InputGroup.Text>
+            <FormControl
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              type="text"
+              placeholder="Robot Name Here"
+              name="name"
+              value={name}
+              onChange={handleChange}
+              required
+            />
+          </InputGroup>
+          <Form.Select name="fuelType" value={fuelType} onChange={handleChange}>
+            <option value="-">Select Fuel Type</option>
             <option value="gas">Gas</option>
             <option value="diesel">Diesel</option>
             <option value="electric">Electric</option>
-          </select>
-          <br />
-          <br />
-          <label>Fuel Level:</label>
-          <input
-            type="text"
-            placeholder="Fuel Level Here"
-            name="fuelLevel"
-            value={fuelLevel}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <button type="submit">Submit</button>
+          </Form.Select>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Fuel Level:</InputGroup.Text>
+            <FormControl
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              type="text"
+              placeholder="Fuel Level Here"
+              name="fuelLevel"
+              value={fuelLevel}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <Button type="submit" variant="outline-primary">
+            Submit
+          </Button>
         </form>
       </div>
     );

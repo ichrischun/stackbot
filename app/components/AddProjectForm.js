@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormControl, InputGroup, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { addedProject } from '../redux/projects';
 
@@ -22,7 +23,7 @@ class AddProjectForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.addedProject({ ...this.state });
-    this.setState({ title: '', deadline: '', priority: '' });
+    this.setState({ title: '', deadline: '', priority: '', description: '' });
   }
   render() {
     const { title, deadline, priority, description } = this.state;
@@ -31,48 +32,56 @@ class AddProjectForm extends React.Component {
       <div className="newForm">
         <h1>Add New Project Below:</h1>
         <form onSubmit={handleSubmit}>
-          <label>Project Title: </label>
-          <input
-            type="text"
-            placeholder="Project Title Here"
-            name="title"
-            value={title}
-            onChange={handleChange}
-            required
-          />
-          <br />
-          <br />
-          <label>Project Deadline: </label>
-          <input
-            type="text"
-            placeholder="(YYYY-MM-DD)"
-            name="deadline"
-            value={deadline}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label>Project Priority: </label>
-          <input
-            type="text"
-            placeholder="Project Priority (1-10)"
-            name="priority"
-            value={priority}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label>Project Description: </label>
-          <input
-            type="text"
-            placeholder="Project Description"
-            name="description"
-            value={description}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <button type="submit">Submit</button>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Project Title: </InputGroup.Text>
+            <FormControl
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              type="text"
+              placeholder="Project Title Here"
+              name="title"
+              value={title}
+              onChange={handleChange}
+              required
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Project Deadline: </InputGroup.Text>
+            <FormControl
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              type="text"
+              placeholder="(YYYY-MM-DD)"
+              name="deadline"
+              value={deadline}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Project Priority: </InputGroup.Text>
+            <FormControl
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              type="text"
+              placeholder="Project Priority (1-10)"
+              name="priority"
+              value={priority}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Project Description: </InputGroup.Text>
+            <FormControl
+              type="text"
+              placeholder="Project Description"
+              name="description"
+              value={description}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <Button type="submit" variant="outline-primary">
+            Submit
+          </Button>
         </form>
       </div>
     );
